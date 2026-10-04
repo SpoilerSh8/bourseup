@@ -230,5 +230,11 @@ export default {
   "correct.removeFile": "ลบไฟล์",
   "correct.or": "หรือ",
   "correct.needContent": "กรุณาอัปโหลดไฟล์หรือวางข้อความจดหมายด้านล่าง",
+  "gen.s0.letterTypeLabel": "ประเภทเอกสารที่ต้องการ",
+  "letterType.motivation_letter": "จดหมายแสดงเจตจำนง",
+  "letterType.study_plan": "แผนการศึกษา (Study Plan)",
+  "letterType.personal_statement": "ประวัติส่วนตัว (Personal Statement)",
+  "letterType.research_proposal": "ข้อเสนอการวิจัย (Research Proposal)",
+  "letterType.cover_letter": "จดหมายสมัครแบบสั้น",
 
 };

@@ -21,8 +21,10 @@ const letterLanguageFor = (locale) =>
 const initialForm = (locale) => ({
   scholarshipId: "", scholarshipName: "", country: "", level: "master", wordLimit: "",
   language: letterLanguageFor(locale),
+  letterType: "motivation_letter", letterFormatNotes: "",
   background: "", goals: "", motivation: "", achievements: "",
 });
+
 
 export default function Generate() {
   const { user, loading: userLoading } = useUser();
@@ -53,19 +55,22 @@ export default function Generate() {
 
   // Préremplissage depuis la page détail d'une bourse
   useEffect(() => {
-    if (!router.isReady) return;
+    if (!router.isReady || catalog.length === 0) return;
     const { scholarshipName, country, level, wordLimit, scholarshipId } = router.query;
-    if (scholarshipName) {
-      setForm((f) => ({
-        ...f,
-        scholarshipId: scholarshipId || "",
-        scholarshipName,
-        country: country || f.country,
-        level: level || f.level,
-        wordLimit: wordLimit || f.wordLimit,
-      }));
-    }
-  }, [router.isReady]);
+    if (!scholarshipName) return;
+    const match = scholarshipId ? catalog.find((s) => s.id === scholarshipId) : null;
+    setForm((f) => ({
+      ...f,
+      scholarshipId: scholarshipId || "",
+      scholarshipName,
+      country: country || f.country,
+      level: level || f.level,
+      wordLimit: wordLimit || f.wordLimit,
+      letterType: match?.letter_type || f.letterType,
+      letterFormatNotes: match?.letter_format_notes || f.letterFormatNotes,
+    }));
+  }, [router.isReady, catalog]);
+
 
   useEffect(() => {
     if (status !== "loading") return;
@@ -85,7 +90,7 @@ export default function Generate() {
     })
     .slice(0, 8);
 
-  function pickScholarship(s) {
+   function pickScholarship(s) {
     setForm((f) => ({
       ...f,
       scholarshipId: s.id,
@@ -93,9 +98,12 @@ export default function Generate() {
       country: s.country || f.country,
       level: s.level || f.level,
       wordLimit: s.word_limit ? String(s.word_limit) : f.wordLimit,
+      letterType: s.letter_type || "motivation_letter",
+      letterFormatNotes: s.letter_format_notes || "",
     }));
     setShowList(false);
   }
+
 
   const canNext = [
     form.scholarshipName.trim().length > 1,
@@ -246,7 +254,13 @@ export default function Generate() {
                   ? <span>{t("gen.s0.fromCatalog")}</span>
                   : <span>{t("gen.s0.notListed")}</span>}
               </div>
+              {form.scholarshipId && (
+                <div className="letter-type-badge">
+                  {t("gen.s0.letterTypeLabel")} : <strong>{t(`letterType.${form.letterType}`)}</strong>
+                </div>
+              )}
             </div>
+
 
             <div className="wiz-row">
               <div className="wiz-field">

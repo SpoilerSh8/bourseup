@@ -2,7 +2,6 @@ import { supabaseAdmin } from "../../lib/supabaseClient";
 import { generateMotivationLetter } from "../../lib/anthropic";
 import { getUserFromRequest } from "../../lib/authServer";
 
-// Extrait un aperçu (~35 % des mots) en gardant les paragraphes.
 function buildPreview(text, ratio = 0.35) {
   const paragraphs = text.split(/\n{2,}/);
   const total = text.split(/\s+/).filter(Boolean).length;
@@ -34,6 +33,7 @@ export default async function handler(req, res) {
   const {
     scholarshipId, scholarshipName, country, level, wordLimit,
     language, background, goals, motivation, achievements,
+    letterType, letterFormatNotes,
   } = req.body;
 
   if (!scholarshipName || !background || !motivation) {
@@ -74,8 +74,7 @@ export default async function handler(req, res) {
       useBonus = true;
     }
 
-       // Plafond de sécurité global : s'applique à TOUS les plans, y compris Pro.
-    // Protège contre un bug ou un abus, jamais atteint en usage normal.
+    // Plafond de sécurité global : s'applique à TOUS les plans, y compris Pro.
     const HARD_MONTHLY_CAP = 30;
     const startOfMonth = new Date();
     startOfMonth.setDate(1);
@@ -97,10 +96,10 @@ export default async function handler(req, res) {
     const { text, tokensUsed, costUsd } = await generateMotivationLetter({
       scholarshipName, country, level, wordLimit, language,
       background, goals, motivation, achievements,
+      letterType: letterType || "motivation_letter",
+      letterFormatNotes,
     });
 
-
-    // Pro ou lettre offerte par l'admin = lettre complète. Sinon aperçu seulement.
     const unlocked = plan === "pro" || useBonus;
 
     const { data: doc, error: docError } = await admin
@@ -110,7 +109,6 @@ export default async function handler(req, res) {
         scholarship_id: scholarshipId || null,
         scholarship_name: scholarshipName,
         type: "motivation_letter",
-
         input_text: JSON.stringify({ background, goals, motivation, achievements }),
         generated_text: text,
         unlocked,
@@ -134,7 +132,6 @@ export default async function handler(req, res) {
       return res.status(200).json({ locked: false, letter: text, documentId: doc.id });
     }
 
-    // Le texte complet ne quitte JAMAIS le serveur pour un utilisateur gratuit.
     const { preview, totalWords } = buildPreview(text);
     return res.status(200).json({ locked: true, preview, totalWords, documentId: doc.id });
   } catch (err) {

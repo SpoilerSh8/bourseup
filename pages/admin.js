@@ -8,7 +8,9 @@ const empty = {
   deadline: "", eligibility_criteria: "", official_link: "", word_limit: "",
   required_documents: "", application_steps: "", authority_info: "", tips: "",
   description: "", benefits: "",
+  letter_type: "motivation_letter", letter_format_notes: "",
 };
+
 
 
 
@@ -52,7 +54,10 @@ export default function Admin() {
       tips: s.tips || "",
       description: s.description || "",
       benefits: s.benefits || "",
+      letter_type: s.letter_type || "motivation_letter",
+      letter_format_notes: s.letter_format_notes || "",
     });
+
 
   }
 
@@ -148,6 +153,18 @@ export default function Admin() {
           value={form.authority_info} onChange={(e) => update("authority_info", e.target.value)} />
         <textarea placeholder="Conseils et bonnes pratiques"
           value={form.tips} onChange={(e) => update("tips", e.target.value)} />
+
+        <label style={{ fontWeight: 600, fontSize: "0.9rem" }}>Type de document demandé</label>
+        <select value={form.letter_type} onChange={(e) => update("letter_type", e.target.value)}>
+          <option value="motivation_letter">Lettre de motivation (classique)</option>
+          <option value="study_plan">Study Plan (plan d'études structuré, ex: CSC)</option>
+          <option value="personal_statement">Personal Statement (récit personnel)</option>
+          <option value="research_proposal">Research Proposal (projet de recherche, doctorat)</option>
+          <option value="cover_letter">Lettre de candidature courte</option>
+        </select>
+        <textarea placeholder="Instructions spécifiques supplémentaires pour l'IA (optionnel) — ex: exigences de format propres à cette bourse"
+          value={form.letter_format_notes} onChange={(e) => update("letter_format_notes", e.target.value)} />
+
         <div style={{ display: "flex", gap: "0.6rem" }}>
 
           <button type="submit">{editingId ? "Enregistrer" : "Ajouter"}</button>

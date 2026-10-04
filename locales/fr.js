@@ -230,5 +230,11 @@ export default {
   "correct.removeFile": "Retirer le fichier",
   "correct.or": "ou",
   "correct.needContent": "Importe un fichier ou colle ta lettre ci-dessous.",
+  "gen.s0.letterTypeLabel": "Type de document attendu",
+  "letterType.motivation_letter": "Lettre de motivation",
+  "letterType.study_plan": "Study Plan (plan d'études)",
+  "letterType.personal_statement": "Personal Statement",
+  "letterType.research_proposal": "Research Proposal",
+  "letterType.cover_letter": "Lettre de candidature courte",
 
 };

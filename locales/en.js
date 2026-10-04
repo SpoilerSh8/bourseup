@@ -230,5 +230,11 @@ export default {
   "correct.removeFile": "Remove file",
   "correct.or": "or",
   "correct.needContent": "Upload a file or paste your letter below.",
+  "gen.s0.letterTypeLabel": "Expected document type",
+  "letterType.motivation_letter": "Motivation letter",
+  "letterType.study_plan": "Study Plan",
+  "letterType.personal_statement": "Personal Statement",
+  "letterType.research_proposal": "Research Proposal",
+  "letterType.cover_letter": "Short cover letter",
 
 };
