@@ -1,0 +1,10 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="400" rx="72" fill="#1B3A4B"/>
+  <!-- toque (mortarboard) -->
+  <path d="M 200 130 L 300 168 L 200 206 L 100 168 Z" fill="#D6E4E5"/>
+  <path d="M 150 182 v 46 c 0 16 22 28 50 28 s 50 -12 50 -28 v -46 l -50 20 z" fill="#D6E4E5"/>
+  <!-- pompon devenant flèche montante -->
+  <circle cx="300" cy="168" r="7" fill="#F2A65A"/>
+  <rect x="296" y="168" width="8" height="55" fill="#F2A65A"/>
+  <path d="M 300 96 L 322 128 L 278 128 Z" fill="#F2A65A"/>
+</svg>
