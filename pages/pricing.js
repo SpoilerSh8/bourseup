@@ -5,7 +5,7 @@ import { useI18n } from "../lib/i18n";
 
 const PAYMENT_LOGOS = [
   { src: "/payments/wave.png", alt: "Wave" },
-  { src: "/payments/orange-money.svg", alt: "Orange Money" },
+  { src: "/payments/orange-money.png", alt: "Orange Money" },
   { src: "/payments/visa.svg", alt: "Visa" },
   { src: "/payments/mastercard.svg", alt: "Mastercard" },
 ];
