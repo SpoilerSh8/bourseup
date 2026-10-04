@@ -95,9 +95,3 @@ Une fois ton compte passé en admin (voir étape 4 ci-dessus), va sur `/admin` :
 
 
 
-PDYA:
-EHVJ-BBL4-ONBL-KBDU-XQ27
-GFTQ-5MFE-TULW-CO02-INIZ
-E7JS-YHHV-E93O-C5RN-BVAV
-WQTM-UIXC-KFLT-MQJF-QNO9
-SFZB-Z2HN-PX7E-H2E2-CKP1
