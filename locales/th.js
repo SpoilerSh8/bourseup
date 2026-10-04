@@ -223,5 +223,12 @@ export default {
   "correct.resultTitle": "ฉบับปรับปรุงแล้ว",
   "correct.proOnlyTitle": "เฉพาะสมาชิก Pro เท่านั้น",
   "correct.proOnlyText": "การปรับปรุงด้วย AI ขั้นสูงเป็นส่วนหนึ่งของแพ็กเกจ Pro",
-  
+  "pricing.payWith": "ชำระเงินด้วย",
+  "pricing.methodsNote": "คุณจะเลือกวิธีชำระเงินที่แน่นอน (Wave, Orange Money, Visa หรือ Mastercard) ในหน้าชำระเงินที่ปลอดภัย",
+  "correct.uploadLabel": "อัปโหลดจดหมายของคุณ (PDF หรือ Word)",
+  "correct.uploadHint": "คลิกเพื่อเลือกไฟล์ .pdf หรือ .docx",
+  "correct.removeFile": "ลบไฟล์",
+  "correct.or": "หรือ",
+  "correct.needContent": "กรุณาอัปโหลดไฟล์หรือวางข้อความจดหมายด้านล่าง",
+
 };

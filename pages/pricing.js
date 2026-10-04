@@ -3,6 +3,13 @@ import { useRouter } from "next/router";
 import { useUser } from "../lib/useUser";
 import { useI18n } from "../lib/i18n";
 
+const PAYMENT_LOGOS = [
+  { src: "/payments/wave.png", alt: "Wave" },
+  { src: "/payments/orange-money.svg", alt: "Orange Money" },
+  { src: "/payments/visa.svg", alt: "Visa" },
+  { src: "/payments/mastercard.svg", alt: "Mastercard" },
+];
+
 export default function Pricing() {
   const { user } = useUser();
   const { t } = useI18n();
@@ -34,9 +41,22 @@ export default function Pricing() {
       <h1>{t("pricing.title")}</h1>
       {router.query.success && <div className="alert-banner">{t("pricing.success")}</div>}
       <p>{t("pricing.text")}</p>
-      <button onClick={upgrade} disabled={loading}>
-        {loading ? t("pricing.redirecting") : t("pricing.button")}
-      </button>
+
+      <div className="pay-methods">
+        {PAYMENT_LOGOS.map((m) => (
+          <button
+            key={m.alt}
+            type="button"
+            className="pay-method-btn"
+            onClick={upgrade}
+            disabled={loading}
+            aria-label={`${t("pricing.payWith")} ${m.alt}`}
+          >
+            <img src={m.src} alt={m.alt} />
+          </button>
+        ))}
+      </div>
+      <p className="pay-methods-note">{loading ? t("pricing.redirecting") : t("pricing.methodsNote")}</p>
     </div>
   );
 }

@@ -33,7 +33,6 @@ export default function Navbar() {
         <Link href="/generate" onClick={closeMenu}>{t("nav.generate")}</Link>
         <Link href="/correct" onClick={closeMenu}>{t("nav.correct")}</Link>
         {user && <Link href="/dashboard" onClick={closeMenu}>{t("nav.dashboard")}</Link>}
-        <Link href="/about" onClick={closeMenu}>{t("nav.about")}</Link>
         <Link href="/pricing" onClick={closeMenu}>{t("nav.pricing")}</Link>
         <LanguageSwitcher />
         {!loading && (

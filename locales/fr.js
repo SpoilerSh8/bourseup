@@ -223,5 +223,12 @@ export default {
   "correct.resultTitle": "Version corrigée",
   "correct.proOnlyTitle": "Fonctionnalité réservée aux membres Pro",
   "correct.proOnlyText": "La correction avancée par IA fait partie de l'abonnement Pro.",
-  
+  "pricing.payWith": "Payer avec",
+  "pricing.methodsNote": "Tu choisiras ta méthode précise (Wave, Orange Money, Visa ou Mastercard) sur la page de paiement sécurisée.",
+  "correct.uploadLabel": "Importer ta lettre (PDF ou Word)",
+  "correct.uploadHint": "Clique pour choisir un fichier .pdf ou .docx",
+  "correct.removeFile": "Retirer le fichier",
+  "correct.or": "ou",
+  "correct.needContent": "Importe un fichier ou colle ta lettre ci-dessous.",
+
 };

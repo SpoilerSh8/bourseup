@@ -9,6 +9,7 @@ export default function Correct() {
   const { t } = useI18n();
   const [isPro, setIsPro] = useState(null);
   const [draftText, setDraftText] = useState("");
+  const [file, setFile] = useState(null);
   const [scholarshipName, setScholarshipName] = useState("");
   const [focus, setFocus] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,16 +22,33 @@ export default function Correct() {
       .then(({ data }) => setIsPro(data?.plan === "pro"));
   }, [user]);
 
+  function handleFile(e) {
+    const f = e.target.files?.[0] || null;
+    setFile(f);
+    if (f) setDraftText(""); // le fichier prend le dessus sur le texte collé
+  }
+
   async function submit(e) {
     e.preventDefault();
+    if (!draftText.trim() && !file) {
+      setError(t("correct.needContent"));
+      return;
+    }
     setLoading(true);
     setError("");
     setResult("");
+
     const { data: { session } } = await supabase.auth.getSession();
+    const formData = new FormData();
+    formData.append("draftText", draftText);
+    formData.append("scholarshipName", scholarshipName);
+    formData.append("focus", focus);
+    if (file) formData.append("file", file);
+
     const res = await fetch("/api/correct-letter", {
       method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${session?.access_token}` },
-      body: JSON.stringify({ draftText, scholarshipName, focus }),
+      headers: { Authorization: `Bearer ${session?.access_token}` },
+      body: formData,
     });
     const data = await res.json();
     setLoading(false);
@@ -70,10 +88,35 @@ export default function Correct() {
 
       <form onSubmit={submit} className="wiz-card">
         <div className="wiz-field">
-          <label>{t("correct.pasteLabel")}</label>
-          <textarea style={{ minHeight: 220 }} placeholder={t("correct.pastePh")}
-            value={draftText} onChange={(e) => setDraftText(e.target.value)} required />
+          <label>{t("correct.uploadLabel")}</label>
+          <label className="upload-drop">
+            <input type="file" accept=".pdf,.docx" onChange={handleFile} hidden />
+            {file ? (
+              <span>📄 {file.name}</span>
+            ) : (
+              <span>{t("correct.uploadHint")}</span>
+            )}
+          </label>
+          {file && (
+            <button type="button" className="upload-clear" onClick={() => setFile(null)}>
+              {t("correct.removeFile")}
+            </button>
+          )}
         </div>
+
+        <div className="wiz-divider"><span>{t("correct.or")}</span></div>
+
+        <div className="wiz-field">
+          <label>{t("correct.pasteLabel")}</label>
+          <textarea
+            style={{ minHeight: 200 }}
+            placeholder={t("correct.pastePh")}
+            value={draftText}
+            disabled={!!file}
+            onChange={(e) => setDraftText(e.target.value)}
+          />
+        </div>
+
         <div className="wiz-row">
           <div className="wiz-field">
             <label>{t("correct.scholarshipLabel")}</label>
@@ -84,6 +127,7 @@ export default function Correct() {
             <input type="text" placeholder={t("correct.focusPh")} value={focus} onChange={(e) => setFocus(e.target.value)} />
           </div>
         </div>
+
         {error && <p className="error">{error}</p>}
         <button className="wiz-btn primary" type="submit" disabled={loading}>
           {loading ? t("correct.loading") : t("correct.submit")}

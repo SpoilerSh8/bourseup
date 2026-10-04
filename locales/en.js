@@ -223,5 +223,12 @@ export default {
   "correct.resultTitle": "Improved version",
   "correct.proOnlyTitle": "Pro members only",
   "correct.proOnlyText": "Advanced AI correction is part of the Pro subscription.",
-  
+  "pricing.payWith": "Pay with",
+  "pricing.methodsNote": "You'll choose your exact method (Wave, Orange Money, Visa or Mastercard) on the secure payment page.",
+  "correct.uploadLabel": "Upload your letter (PDF or Word)",
+  "correct.uploadHint": "Click to choose a .pdf or .docx file",
+  "correct.removeFile": "Remove file",
+  "correct.or": "or",
+  "correct.needContent": "Upload a file or paste your letter below.",
+
 };
