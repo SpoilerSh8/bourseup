@@ -10,7 +10,8 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",
     "formidable": "^3.5.1",
-    "mammoth": "^1.8.0",
+    "jspdf": "^4.2.1",
+    "mammoth": "^0.3.29",
     "next": "^14.2.35",
     "pdf-parse": "^1.1.1",
     "qs": "^6.11.0",

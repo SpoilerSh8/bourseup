@@ -129,7 +129,7 @@ export default {
 
   "letter.copy": "Copy",
   "letter.copied": "✓ Copied",
-  "letter.download": "Download (.txt)",
+  "letter.download": "Download (PDF)",
   "letter.print": "Print",
   "letter.printBlocked": "Preview can't be printed. Go Pro to print your letter.",
   "letter.unlockTitle": "The rest of your letter is for Pro members",

@@ -129,7 +129,7 @@ export default {
 
   "letter.copy": "คัดลอก",
   "letter.copied": "✓ คัดลอกแล้ว",
-  "letter.download": "ดาวน์โหลด (.txt)",
+  "letter.download": "ดาวน์โหลด (PDF)",
   "letter.print": "พิมพ์",
   "letter.printBlocked": "ตัวอย่างนี้พิมพ์ไม่ได้ อัปเกรดเป็น Pro เพื่อพิมพ์จดหมายของคุณ",
   "letter.unlockTitle": "ส่วนที่เหลือของจดหมายสงวนไว้สำหรับสมาชิก Pro",

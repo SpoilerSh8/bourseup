@@ -301,10 +301,14 @@ html[lang="th"] body { line-height: 1.7; }
 .unlock-actions { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; }
 
 .print-blocked { display: none; }
+
+/* N'affiche à l'impression QUE le contenu marqué .printable-letter — rien du reste du site */
 @media print {
-  .letter-paper.locked { display: none !important; }
-  .print-blocked { display: block; padding: 2rem; text-align: center; }
+  body * { visibility: hidden; }
+  .printable-letter, .printable-letter * { visibility: visible; }
+  .printable-letter { position: absolute; left: 0; top: 0; width: 100%; padding: 0; box-shadow: none; border: none; }
 }
+
 
 @media (max-width: 600px) {
   .wiz-row { grid-template-columns: 1fr; }
@@ -417,4 +421,9 @@ html[data-lang-pending] body { visibility: hidden; }
 .wiz-divider { display: flex; align-items: center; gap: 0.8rem; margin: 1.2rem 0; color: #8A9296; font-size: 0.8rem; }
 .wiz-divider::before, .wiz-divider::after { content: ""; flex: 1; height: 1px; background: #E4EAEA; }
 .letter-type-badge { background: #D6E4E5; color: #1B3A4B; font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; margin-top: 0.6rem; display: inline-block; }
+.letter-text h1, .letter-text h2, .letter-text h3 { font-family: 'Fraunces', Georgia, serif; color: #1B3A4B; margin: 1.3rem 0 0.5rem; line-height: 1.3; }
+.letter-text h1 { font-size: 1.5rem; }
+.letter-text h2 { font-size: 1.25rem; }
+.letter-text h3 { font-size: 1.05rem; }
+.letter-text h1:first-child, .letter-text h2:first-child, .letter-text h3:first-child { margin-top: 0; }
 

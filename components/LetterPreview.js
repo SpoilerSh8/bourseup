@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useI18n } from "../lib/i18n";
+import FormattedLetter from "./FormattedLetter";
+import { downloadLetterPdf } from "../lib/letterPdf";
 
 export default function LetterPreview({ result, onRefreshAccess }) {
   const { t } = useI18n();
@@ -9,7 +11,6 @@ export default function LetterPreview({ result, onRefreshAccess }) {
   const [hidden, setHidden] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  // Freins anti-capture (dissuasion uniquement : la vraie protection est côté serveur).
   useEffect(() => {
     if (!locked) return;
     let timer;
@@ -24,7 +25,7 @@ export default function LetterPreview({ result, onRefreshAccess }) {
         hideFor(2500);
         navigator.clipboard?.writeText("").catch(() => {});
       }
-      if (e.metaKey && e.shiftKey) hideFor(); // Cmd+Shift+3/4/5 sur Mac
+      if (e.metaKey && e.shiftKey) hideFor();
       if ((e.ctrlKey || e.metaKey) && ["c", "p", "s", "a"].includes(k)) e.preventDefault();
     };
     const onKeyUp = (e) => {
@@ -53,7 +54,6 @@ export default function LetterPreview({ result, onRefreshAccess }) {
   }, [locked]);
 
   const block = locked ? (e) => e.preventDefault() : undefined;
-  const paragraphs = (text || "").split(/\n{2,}/).filter(Boolean);
 
   async function copy() {
     await navigator.clipboard.writeText(text);
@@ -62,13 +62,7 @@ export default function LetterPreview({ result, onRefreshAccess }) {
   }
 
   function download() {
-    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "lettre-de-motivation.txt";
-    a.click();
-    URL.revokeObjectURL(url);
+    downloadLetterPdf(text, "lettre-de-motivation.pdf");
   }
 
   return (
@@ -82,14 +76,14 @@ export default function LetterPreview({ result, onRefreshAccess }) {
       )}
 
       <div
-        className={`letter-paper ${locked ? "locked" : ""} ${hidden ? "is-hidden" : ""}`}
+        className={`letter-paper ${locked ? "locked" : "printable-letter"} ${hidden ? "is-hidden" : ""}`}
         onContextMenu={block}
         onCopy={block}
         onCut={block}
         onDragStart={block}
       >
         <div className="letter-text">
-          {paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+          <FormattedLetter text={text} />
         </div>
 
         {locked && (
@@ -106,7 +100,9 @@ export default function LetterPreview({ result, onRefreshAccess }) {
         )}
       </div>
 
-      {locked && <div className="print-blocked">{t("letter.printBlocked")}</div>}
+      {locked && (
+        <div className="print-blocked printable-letter">{t("letter.printBlocked")}</div>
+      )}
 
       {locked && (
         <div className="unlock-card">

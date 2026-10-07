@@ -3,6 +3,9 @@ import Link from "next/link";
 import { useUser } from "../lib/useUser";
 import { useI18n } from "../lib/i18n";
 import { supabase } from "../lib/supabaseClient";
+import FormattedLetter from "../components/FormattedLetter";
+import { downloadLetterPdf } from "../lib/letterPdf";
+
 
 export default function Correct() {
   const { user, loading: userLoading } = useUser();
@@ -134,12 +137,22 @@ export default function Correct() {
         </button>
       </form>
 
-      {result && (
-        <div className="letter-paper" style={{ marginTop: "1.5rem" }}>
-          <h2>{t("correct.resultTitle")}</h2>
-          {result.split(/\n{2,}/).filter(Boolean).map((p, i) => <p key={i}>{p}</p>)}
-        </div>
+    {result && (
+        <>
+          <div className="letter-toolbar" style={{ marginTop: "1.5rem" }}>
+            <button className="wiz-btn" onClick={async () => { await navigator.clipboard.writeText(result); }}>{t("letter.copy")}</button>
+            <button className="wiz-btn" onClick={() => downloadLetterPdf(result, "lettre-corrigee.pdf")}>{t("letter.download")}</button>
+            <button className="wiz-btn ghost" onClick={() => window.print()}>{t("letter.print")}</button>
+          </div>
+          <div className="letter-paper printable-letter">
+            <h2>{t("correct.resultTitle")}</h2>
+            <div className="letter-text">
+              <FormattedLetter text={result} />
+            </div>
+          </div>
+        </>
       )}
+
     </div>
   );
 }
