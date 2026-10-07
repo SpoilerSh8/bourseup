@@ -426,7 +426,7 @@ html[data-lang-pending] body { visibility: hidden; }
 .letter-text h2 { font-size: 1.25rem; }
 .letter-text h3 { font-size: 1.05rem; }
 .letter-text h1:first-child, .letter-text h2:first-child, .letter-text h3:first-child { margin-top: 0; }
-.letter-header { display: flex; flex-direction: column; align-items: flex-end; text-align: right; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid #E4EAEA; font-size: 0.88rem; color: #23343D; }
+.letter-header { display: flex; flex-direction: column; align-items: flex-end; text-align: left; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid #E4EAEA; font-size: 0.88rem; color: #23343D; }
 .letter-header strong { font-size: 0.95rem; }
 .letter-header span { color: #6C7A80; }
 
