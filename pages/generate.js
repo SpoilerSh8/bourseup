@@ -39,6 +39,7 @@ export default function Generate() {
   const [msgIndex, setMsgIndex] = useState(0);
   const [catalog, setCatalog] = useState([]);
   const [showList, setShowList] = useState(false);
+  const [fullName, setFullName] = useState("");
 
   // La langue de la lettre suit la langue du site (modifiable ensuite)
   useEffect(() => {
@@ -70,6 +71,12 @@ export default function Generate() {
       letterFormatNotes: match?.letter_format_notes || f.letterFormatNotes,
     }));
   }, [router.isReady, catalog]);
+  
+  useEffect(() => {
+    if (!user) return;
+    supabase.from("profiles").select("full_name").eq("id", user.id).single()
+      .then(({ data }) => setFullName(data?.full_name || ""));
+  }, [user]);
 
 
   useEffect(() => {
@@ -192,7 +199,7 @@ export default function Generate() {
       <div className="wiz">
         <h1 className="wiz-title">{result.locked ? t("gen.previewTitle") : t("gen.readyTitle")}</h1>
         <p className="wiz-sub">{form.scholarshipName}</p>
-        <LetterPreview result={result} onRefreshAccess={refreshAccess} />
+        <LetterPreview result={result} onRefreshAccess={refreshAccess} userName={fullName} userEmail={user.email} />
         <div className="wiz-nav">
           <button className="wiz-btn ghost" onClick={() => { setStatus("idle"); setStep(3); }}>{t("gen.editAnswers")}</button>
           <button className="wiz-btn ghost" onClick={restart}>{t("gen.newLetter")}</button>

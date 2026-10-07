@@ -4,7 +4,7 @@ import { useI18n } from "../lib/i18n";
 import FormattedLetter from "./FormattedLetter";
 import { downloadLetterPdf } from "../lib/letterPdf";
 
-export default function LetterPreview({ result, onRefreshAccess }) {
+export default function LetterPreview({ result, onRefreshAccess, userName, userEmail }) {
   const { t } = useI18n();
   const locked = result.locked;
   const text = locked ? result.preview : result.letter;
@@ -62,7 +62,7 @@ export default function LetterPreview({ result, onRefreshAccess }) {
   }
 
   function download() {
-    downloadLetterPdf(text, "lettre-de-motivation.pdf");
+    downloadLetterPdf(text, "lettre-de-motivation.pdf", { name: userName, email: userEmail });
   }
 
   return (
@@ -82,6 +82,13 @@ export default function LetterPreview({ result, onRefreshAccess }) {
         onCut={block}
         onDragStart={block}
       >
+        {(userName || userEmail) && (
+          <div className="letter-header">
+            {userName && <strong>{userName}</strong>}
+            {userEmail && <span>{userEmail}</span>}
+          </div>
+        )}
+
         <div className="letter-text">
           <FormattedLetter text={text} />
         </div>
@@ -100,9 +107,7 @@ export default function LetterPreview({ result, onRefreshAccess }) {
         )}
       </div>
 
-      {locked && (
-        <div className="print-blocked printable-letter">{t("letter.printBlocked")}</div>
-      )}
+      {locked && <div className="print-blocked printable-letter">{t("letter.printBlocked")}</div>}
 
       {locked && (
         <div className="unlock-card">

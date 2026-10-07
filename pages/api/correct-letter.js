@@ -60,6 +60,8 @@ export default async function handler(req, res) {
   let draftText = one(fields.draftText) || "";
   const scholarshipName = one(fields.scholarshipName) || "";
   const focus = one(fields.focus) || "";
+  const letterTypeField = one(fields.letterType) || "motivation_letter";
+
   const uploadedFile = one(files.file);
 
   if (uploadedFile) {
@@ -93,7 +95,11 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { text, tokensUsed, costUsd } = await improveLetter({ draftText, scholarshipName, focus });
+    const { text, tokensUsed, costUsd } = await improveLetter({
+      draftText, scholarshipName, focus,
+      letterType: letterTypeField,
+    });
+
 
     const { data: doc, error: docError } = await admin
       .from("documents")
