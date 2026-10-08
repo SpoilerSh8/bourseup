@@ -236,9 +236,5 @@ export default {
   "letterType.personal_statement": "Personal Statement",
   "letterType.research_proposal": "Research Proposal",
   "letterType.cover_letter": "Short cover letter",
-  "embed.close": "Close",
-  "embed.loading": "Loading...",
-  "embed.blockedHint": "This site is taking a while to load, or refuses to display here.",
-  "embed.openNewTab": "Open in a new tab →",
-
+  
 };

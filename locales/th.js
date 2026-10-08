@@ -236,9 +236,5 @@ export default {
   "letterType.personal_statement": "ประวัติส่วนตัว (Personal Statement)",
   "letterType.research_proposal": "ข้อเสนอการวิจัย (Research Proposal)",
   "letterType.cover_letter": "จดหมายสมัครแบบสั้น",
-  "embed.close": "ปิด",
-  "embed.loading": "กำลังโหลด...",
-  "embed.blockedHint": "เว็บไซต์นี้ใช้เวลาโหลดนาน หรือปฏิเสธการแสดงผลที่นี่",
-  "embed.openNewTab": "เปิดในแท็บใหม่ →",
-
+  
 };

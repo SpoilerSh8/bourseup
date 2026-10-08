@@ -1,4 +1,3 @@
-import ExternalLink from "../../components/ExternalLink";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "../../lib/supabaseClient";
@@ -82,8 +81,7 @@ export default function ScholarshipDetail() {
             <button className="secondary">{t("detail.generate")}</button>
           </a>
           {scholarship.official_link && user && (
-            <ExternalLink href={scholarship.official_link}>{t("detail.official")}</ExternalLink>
-          )}
+            <a href={scholarship.official_link} target="_blank" rel="noreferrer">{t("detail.official")}</a>          )}
         </div>
       </div>
 

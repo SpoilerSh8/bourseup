@@ -429,18 +429,3 @@ html[data-lang-pending] body { visibility: hidden; }
 .letter-header { display: flex; flex-direction: column; align-items: flex-start; text-align: left; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid #E4EAEA; font-size: 0.88rem; color: #23343D; }
 .letter-header strong { font-size: 0.95rem; }
 .letter-header span { color: #6C7A80; }
-.embed-overlay { position: fixed; inset: 0; background: rgba(20,32,40,0.55); backdrop-filter: blur(2px); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 1.2rem; }
-.embed-box { background: #fff; width: 100%; max-width: 900px; height: min(85vh, 760px); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 30px 70px rgba(0,0,0,0.3); }
-.embed-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.9rem; background: #1B3A4B; }
-.embed-dot { width: 10px; height: 10px; border-radius: 50%; background: #F2A65A; }
-.embed-close { background: rgba(255,255,255,0.15); border: none; color: #fff; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 0.9rem; }
-.embed-body { position: relative; flex: 1; background: #fff; }
-.embed-iframe { width: 100%; height: 100%; border: none; }
-.embed-loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #6C7A80; font-size: 0.9rem; }
-.embed-fallback { padding: 0.8rem 1rem; background: #FFFBF5; border-top: 1px solid #F2A65A; font-size: 0.85rem; text-align: center; }
-.embed-fallback a { color: #1B3A4B; font-weight: 600; }
-
-@media (max-width: 600px) {
-  .embed-box { height: 90vh; border-radius: 10px; }
-}
-
