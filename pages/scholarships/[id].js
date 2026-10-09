@@ -5,7 +5,6 @@ import { useUser } from "../../lib/useUser";
 import { useI18n } from "../../lib/i18n";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import ExternalLink from "../../components/ExternalLink";
 
 function daysLeft(deadline) {
   if (!deadline) return null;
