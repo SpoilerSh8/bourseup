@@ -7,15 +7,18 @@
     "build": "next build",
     "start": "next start"
   },
-  "dependencies": {
+    "dependencies": {
     "@supabase/supabase-js": "^2.45.0",
     "formidable": "^3.5.1",
-    "jspdf": "^4.2.1",
-    "mammoth": "^0.3.29",
-    "next": "^14.2.35",
+    "jspdf": "^2.5.2",
+    "mammoth": "^1.8.0",
+    "next": "14.2.5",
     "pdf-parse": "^1.1.1",
     "qs": "^6.11.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-markdown": "^9.0.1",
+    "remark-gfm": "^4.0.0"
   }
+
 }

@@ -236,5 +236,6 @@ export default {
   "letterType.personal_statement": "Personal Statement",
   "letterType.research_proposal": "Research Proposal",
   "letterType.cover_letter": "Lettre de candidature courte",
+  "level.all": "Tous les niveaux",
   
 };

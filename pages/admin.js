@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useUser } from "../lib/useUser";
 import { supabase } from "../lib/supabaseClient";
 
+const LEVEL_LABELS = { bachelor: "Licence", master: "Master", phd: "Doctorat", all: "Tous niveaux" };
+
 const empty = {
   name: "", provider: "", country: "", level: "master",
   deadline: "", eligibility_criteria: "", official_link: "", word_limit: "",
@@ -10,9 +12,6 @@ const empty = {
   description: "", benefits: "",
   letter_type: "motivation_letter", letter_format_notes: "",
 };
-
-
-
 
 export default function Admin() {
   const { user, loading: userLoading } = useUser();
@@ -134,6 +133,7 @@ export default function Admin() {
           <option value="bachelor">Licence</option>
           <option value="master">Master</option>
           <option value="phd">Doctorat</option>
+          <option value="all">Tous les niveaux</option>
         </select>
         <input type="date" value={form.deadline} onChange={(e) => update("deadline", e.target.value)} />
         <textarea placeholder="Description de la bourse (paragraphe libre)" rows={3}
@@ -147,7 +147,7 @@ export default function Admin() {
         <input placeholder="Limite de mots (lettre)" value={form.word_limit} onChange={(e) => update("word_limit", e.target.value)} />
         <input placeholder="Documents requis, séparés par des virgules (ex: passeport, relevés de notes, lettres de recommandation)"
           value={form.required_documents} onChange={(e) => update("required_documents", e.target.value)} />
-        <textarea placeholder="Étapes à suivre — une étape par ligne" rows={4}
+        <textarea placeholder="Étapes à suivre — Markdown supporté (titres #, gras **texte**, liens [texte](url), tableaux, citations >...)" rows={8}
           value={form.application_steps} onChange={(e) => update("application_steps", e.target.value)} />
         <textarea placeholder="Où déposer le dossier / administration compétente"
           value={form.authority_info} onChange={(e) => update("authority_info", e.target.value)} />
@@ -179,7 +179,7 @@ export default function Admin() {
         {scholarships.map((s) => (
           <div key={s.id} className="card">
             <h3>{s.name}</h3>
-            <p className="meta">{s.country} · {s.level} · {s.deadline}</p>
+              <p className="meta">{s.country} · {LEVEL_LABELS[s.level] || s.level} · {s.deadline}</p>
             <div className="card-actions">
               <button onClick={() => startEdit(s)}>Modifier</button>
               <button onClick={() => handleDelete(s.id)}>Supprimer</button>

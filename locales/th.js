@@ -236,5 +236,6 @@ export default {
   "letterType.personal_statement": "ประวัติส่วนตัว (Personal Statement)",
   "letterType.research_proposal": "ข้อเสนอการวิจัย (Research Proposal)",
   "letterType.cover_letter": "จดหมายสมัครแบบสั้น",
+  "level.all": "ทุกระดับ",
   
 };

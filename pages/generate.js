@@ -97,13 +97,13 @@ export default function Generate() {
     })
     .slice(0, 8);
 
-   function pickScholarship(s) {
+  function pickScholarship(s) {
     setForm((f) => ({
       ...f,
       scholarshipId: s.id,
       scholarshipName: s.name,
       country: s.country || f.country,
-      level: s.level || f.level,
+      level: (s.level && s.level !== "all") ? s.level : f.level,
       wordLimit: s.word_limit ? String(s.word_limit) : f.wordLimit,
       letterType: s.letter_type || "motivation_letter",
       letterFormatNotes: s.letter_format_notes || "",

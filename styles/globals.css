@@ -429,3 +429,18 @@ html[data-lang-pending] body { visibility: hidden; }
 .letter-header { display: flex; flex-direction: column; align-items: flex-start; text-align: left; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid #E4EAEA; font-size: 0.88rem; color: #23343D; }
 .letter-header strong { font-size: 0.95rem; }
 .letter-header span { color: #6C7A80; }
+.steps-markdown h1, .steps-markdown h2, .steps-markdown h3 { font-family: 'Fraunces', Georgia, serif; color: #1B3A4B; margin: 1.2rem 0 0.5rem; line-height: 1.3; }
+.steps-markdown h1:first-child, .steps-markdown h2:first-child, .steps-markdown h3:first-child { margin-top: 0; }
+.steps-markdown h1 { font-size: 1.35rem; }
+.steps-markdown h2 { font-size: 1.15rem; }
+.steps-markdown h3 { font-size: 1.02rem; }
+.steps-markdown p { margin: 0 0 0.9rem; line-height: 1.6; color: #3E4E56; }
+.steps-markdown ul, .steps-markdown ol { padding-left: 1.3rem; margin: 0 0 0.9rem; }
+.steps-markdown li { margin-bottom: 0.45rem; line-height: 1.55; color: #3E4E56; }
+.steps-markdown strong { color: #1B3A4B; }
+.steps-markdown a { color: #1B3A4B; font-weight: 600; text-decoration: underline; cursor: pointer; }
+.steps-markdown blockquote { border-left: 3px solid #F2A65A; background: #FFFBF5; padding: 0.7rem 1rem; margin: 0 0 1rem; color: #7A4A12; font-size: 0.92rem; border-radius: 0 6px 6px 0; }
+.steps-markdown hr { border: none; border-top: 1px solid #E4EAEA; margin: 1.6rem 0; }
+.steps-markdown table { width: 100%; border-collapse: collapse; margin: 0 0 1.1rem; font-size: 0.88rem; }
+.steps-markdown th, .steps-markdown td { border: 1px solid #E4EAEA; padding: 0.5rem 0.7rem; text-align: left; }
+.steps-markdown th { background: #F7FAFA; color: #1B3A4B; font-weight: 600; }

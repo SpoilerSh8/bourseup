@@ -3,6 +3,9 @@ import { useRouter } from "next/router";
 import { supabase } from "../../lib/supabaseClient";
 import { useUser } from "../../lib/useUser";
 import { useI18n } from "../../lib/i18n";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import ExternalLink from "../../components/ExternalLink";
 
 function daysLeft(deadline) {
   if (!deadline) return null;
@@ -48,7 +51,6 @@ export default function ScholarshipDetail() {
   if (!scholarship) return <p className="loading">{t("common.loading")}</p>;
 
   const days = daysLeft(scholarship.deadline);
-  const steps = lines(scholarship.application_steps);
   const documents = Array.isArray(scholarship.required_documents) ? scholarship.required_documents : [];
   const benefits = lines(scholarship.benefits);
   const criteria = lines(scholarship.eligibility_criteria);
@@ -77,7 +79,7 @@ export default function ScholarshipDetail() {
           ) : (
             <button onClick={track}>{t("detail.track")}</button>
           )}
-          <a href={`/generate?scholarshipId=${scholarship.id}&scholarshipName=${encodeURIComponent(scholarship.name)}&country=${encodeURIComponent(scholarship.country || "")}&level=${scholarship.level}&wordLimit=${scholarship.word_limit || ""}`}>
+          <a href={`/generate?scholarshipId=${scholarship.id}&scholarshipName=${encodeURIComponent(scholarship.name)}&country=${encodeURIComponent(scholarship.country || "")}&level=${scholarship.level === "all" ? "" : scholarship.level}&wordLimit=${scholarship.word_limit || ""}`}>
             <button className="secondary">{t("detail.generate")}</button>
           </a>
           {scholarship.official_link && user && (
@@ -109,10 +111,15 @@ export default function ScholarshipDetail() {
           ) : empty}
         </section>
 
-        {steps.length > 0 && (
-          <section className="detail-section">
+        {scholarship.application_steps && (
+          <section className="detail-section steps-markdown">
             <h2>{t("detail.steps")}</h2>
-            <ol className="step-list">{steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{ a: ({ href, children }) => <ExternalLink href={href}>{children}</ExternalLink> }}
+            >
+              {scholarship.application_steps}
+            </ReactMarkdown>
           </section>
         )}
 
