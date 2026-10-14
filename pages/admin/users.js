@@ -106,7 +106,7 @@ export default function AdminUsers() {
     <div className="container">
       <h1>Admin — Utilisateurs</h1>
         <p>
-        <Link href="/admin">→ Gérer les bourses</Link> ·{" "}
+        <Link href="/admin">→ Gérer les bourses</Link> 
         <Link href="/admin/stats">Statistiques</Link>
       </p>
 
