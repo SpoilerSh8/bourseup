@@ -25,7 +25,7 @@ export default function AdminUsers() {
   }, [isAdmin]);
 
   async function loadUsers(q = "") {
-    const res = await fetch(`/api/admin/users?adminUserId=${user.id}&q=${encodeURIComponent(q)}`);
+    const res = await adminFetch(`/api/admin/users?adminUserId=${user.id}&q=${encodeURIComponent(q)}`);
     setUsers(await res.json());
   }
 
@@ -37,7 +37,7 @@ export default function AdminUsers() {
     }
     setExpandedUser(targetUserId);
     setRevealedDoc(null);
-    const res = await fetch(`/api/admin/user-activity?adminUserId=${user.id}&targetUserId=${targetUserId}`);
+    const res = await adminFetch(`/api/admin/user-activity?adminUserId=${user.id}&targetUserId=${targetUserId}`);
     setDocs(await res.json());
   }
 
@@ -49,7 +49,7 @@ export default function AdminUsers() {
       alert("Une justification d'au moins quelques mots est requise — action annulée.");
       return;
     }
-    const res = await fetch(
+    const res = await adminFetch(
       `/api/admin/user-activity?adminUserId=${user.id}&targetUserId=${targetUserId}&revealDocumentId=${documentId}&reason=${encodeURIComponent(reason)}`
     );
     const data = await res.json();
@@ -62,7 +62,7 @@ export default function AdminUsers() {
       alert("Action annulée : une justification est requise.");
       return;
     }
-    const res = await fetch("/api/admin/reset-password", {
+    const res = await adminFetch("/api/admin/reset-password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ adminUserId: user.id, targetUserId, targetEmail, reason }),
@@ -80,7 +80,7 @@ export default function AdminUsers() {
       return;
     }
     setError("");
-    const res = await fetch("/api/admin/user-action", {
+    const res = await adminFetch("/api/admin/user-action", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ adminUserId: user.id, targetUserId, action, value, reason }),
