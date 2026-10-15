@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useUser } from "../lib/useUser";
 import { supabase } from "../lib/supabaseClient";
+import { adminFetch } from "../lib/adminFetch";
 
 const LEVEL_LABELS = { bachelor: "Licence", master: "Master", phd: "Doctorat", all: "Tous niveaux" };
 
@@ -32,7 +33,7 @@ export default function Admin() {
   }, [isAdmin]);
 
   async function loadScholarships() {
-    const res = await fetch("/api/scholarships");
+    const res = await adminFetch("/api/scholarships");
     setScholarships(await res.json());
   }
 
@@ -80,7 +81,7 @@ export default function Admin() {
     };
 
 
-    const res = await fetch("/api/scholarships", {
+    const res = await adminFetch("/api/scholarships", {
       method,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -97,7 +98,7 @@ export default function Admin() {
 
   async function handleDelete(id) {
     if (!confirm("Supprimer cette bourse ?")) return;
-    await fetch("/api/scholarships", {
+    await adminFetch("/api/scholarships", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ adminUserId: user.id, id }),

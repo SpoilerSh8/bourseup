@@ -1,14 +1,13 @@
 import { supabaseAdmin } from "../../../lib/supabaseClient";
-import { requireAdmin, logAdminAction } from "../../../lib/adminGuard";
+import { requireAdminFromRequest, logAdminAction } from "../../../lib/adminGuard";
 
 export default async function handler(req, res) {
   if (req.method !== "GET") return res.status(405).json({ error: "Méthode non autorisée" });
 
-  const { adminUserId, targetUserId, revealDocumentId, reason } = req.query;
-
-  if (!(await requireAdmin(adminUserId))) {
-    return res.status(403).json({ error: "Accès réservé aux admins." });
-  }
+  const auth = await requireAdminFromRequest(req);
+  if (auth.error) return res.status(auth.status).json({ error: auth.error });
+  const adminUserId = auth.user.id;
+  const { targetUserId, revealDocumentId, reason } = req.query;
   if (!targetUserId) {
     return res.status(400).json({ error: "targetUserId requis." });
   }

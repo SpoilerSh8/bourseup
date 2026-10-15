@@ -1,16 +1,15 @@
 import { supabaseAdmin } from "../../../lib/supabaseClient";
-import { requireAdmin, logAdminAction } from "../../../lib/adminGuard";
+import { requireAdminFromRequest, logAdminAction } from "../../../lib/adminGuard";
 
 const ALLOWED_ACTIONS = ["set_plan", "grant_bonus", "toggle_admin"];
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Méthode non autorisée" });
 
-  const { adminUserId, targetUserId, action, value, reason } = req.body;
-
-  if (!(await requireAdmin(adminUserId))) {
-    return res.status(403).json({ error: "Accès réservé aux admins." });
-  }
+  const auth = await requireAdminFromRequest(req);
+  if (auth.error) return res.status(auth.status).json({ error: auth.error });
+  const adminUserId = auth.user.id;
+  const { targetUserId, action, value, reason } = req.body;
   if (!ALLOWED_ACTIONS.includes(action)) {
     return res.status(400).json({ error: "Action inconnue." });
   }

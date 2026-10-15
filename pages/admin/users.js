@@ -2,6 +2,7 @@ import { useEffect, useState, Fragment } from "react";
 import { useUser } from "../../lib/useUser";
 import { supabase } from "../../lib/supabaseClient";
 import Link from "next/link";
+import { adminFetch } from "../../lib/adminFetch";
 
 export default function AdminUsers() {
   const { user, loading: userLoading } = useUser();

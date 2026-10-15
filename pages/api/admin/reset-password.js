@@ -1,14 +1,13 @@
 import { supabase } from "../../../lib/supabaseClient";
-import { requireAdmin, logAdminAction } from "../../../lib/adminGuard";
+import { requireAdminFromRequest, logAdminAction } from "../../../lib/adminGuard";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Méthode non autorisée" });
 
-  const { adminUserId, targetUserId, targetEmail, reason } = req.body;
-
-  if (!(await requireAdmin(adminUserId))) {
-    return res.status(403).json({ error: "Accès réservé aux admins." });
-  }
+  const auth = await requireAdminFromRequest(req);
+  if (auth.error) return res.status(auth.status).json({ error: auth.error });
+  const adminUserId = auth.user.id;
+  const { targetUserId, targetEmail, reason } = req.body;
   if (!targetEmail) return res.status(400).json({ error: "targetEmail requis." });
   if (!reason || reason.trim().length < 3) {
     return res.status(400).json({ error: "Une justification est requise." });
