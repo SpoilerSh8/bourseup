@@ -5,7 +5,6 @@ import { useI18n } from "../lib/i18n";
 import { supabase } from "../lib/supabaseClient";
 import FormattedLetter from "../components/FormattedLetter";
 import { downloadLetterPdf } from "../lib/letterPdf";
-import { supabase } from "../lib/supabaseClient";
 import { isProActive } from "../lib/subscriptionStatus";
 
 
