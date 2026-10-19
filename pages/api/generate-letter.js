@@ -1,6 +1,8 @@
 import { supabaseAdmin } from "../../lib/supabaseClient";
 import { generateMotivationLetter } from "../../lib/anthropic";
 import { getUserFromRequest } from "../../lib/authServer";
+import { isProActive } from "../../lib/subscriptionStatus";
+
 
 function buildPreview(text, ratio = 0.35) {
   const paragraphs = text.split(/\n{2,}/);
@@ -45,11 +47,11 @@ export default async function handler(req, res) {
   try {
     const { data: sub } = await admin
       .from("subscriptions")
-      .select("plan, bonus_generations")
+      .select("plan, bonus_generations, current_period_end")
       .eq("user_id", userId)
       .single();
 
-    const plan = sub?.plan || "free";
+    const plan = isProActive(sub) ? "pro" : "free";
     const bonus = sub?.bonus_generations || 0;
     let useBonus = false;
 

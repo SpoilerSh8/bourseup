@@ -26,7 +26,8 @@ export default async function handler(req, res) {
   try {
     if (action === "set_plan") {
       if (!["free", "pro"].includes(value)) return res.status(400).json({ error: "value doit être 'free' ou 'pro'." });
-      await admin.from("subscriptions").update({ plan: value }).eq("user_id", targetUserId);
+      // Un Pro accordé manuellement par un admin n'expire pas tout seul (pas de current_period_end).
+      await admin.from("subscriptions").update({ plan: value, current_period_end: null }).eq("user_id", targetUserId);
     }
 
     if (action === "grant_bonus") {

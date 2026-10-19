@@ -35,7 +35,8 @@ export default async function handler(req, res) {
     const userId = confirmation.custom_data?.userId;
     if (userId) {
       const admin = supabaseAdmin();
-      await admin.from("subscriptions").update({ plan: "pro" }).eq("user_id", userId);
+      const periodEnd = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+      await admin.from("subscriptions").update({ plan: "pro", current_period_end: periodEnd }).eq("user_id", userId);
       await admin.from("payments").upsert(
         {
           invoice_token: token,

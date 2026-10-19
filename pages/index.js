@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { useI18n } from "../lib/i18n";
+import { useUser } from "../lib/useUser";
 
 export default function Home() {
   const { t } = useI18n();
+  const { user } = useUser();
   return (
     <>
       <section className="landing-hero">
@@ -33,10 +35,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="landing-cta-band">
-        <h2>{t("home.ctaTitle")}</h2>
-        <Link href="/signup"><button>{t("home.ctaSignup")}</button></Link>
-      </section>
+      {!user && (
+        <section className="landing-cta-band">
+          <h2>{t("home.ctaTitle")}</h2>
+          <Link href="/signup"><button>{t("home.ctaSignup")}</button></Link>
+        </section>
+      )}
     </>
   );
 }

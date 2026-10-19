@@ -5,6 +5,9 @@ import { useI18n } from "../lib/i18n";
 import { supabase } from "../lib/supabaseClient";
 import FormattedLetter from "../components/FormattedLetter";
 import { downloadLetterPdf } from "../lib/letterPdf";
+import { supabase } from "../lib/supabaseClient";
+import { isProActive } from "../lib/subscriptionStatus";
+
 
 const LETTER_TYPES = ["motivation_letter", "study_plan", "personal_statement", "research_proposal", "cover_letter"];
 
@@ -26,8 +29,8 @@ export default function Correct() {
 
   useEffect(() => {
     if (!user) return;
-    supabase.from("subscriptions").select("plan").eq("user_id", user.id).single()
-      .then(({ data }) => setIsPro(data?.plan === "pro"));
+    supabase.from("subscriptions").select("plan, current_period_end").eq("user_id", user.id).single()
+      .then(({ data }) => setIsPro(isProActive(data)));
   }, [user]);
 
   useEffect(() => {

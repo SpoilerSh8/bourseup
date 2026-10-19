@@ -237,5 +237,10 @@ export default {
   "letterType.research_proposal": "Research Proposal",
   "letterType.cover_letter": "Lettre de candidature courte",
   "level.all": "Tous les niveaux",
-  
+  "nav.renew": "Renouveler Pro",
+  "pricing.alreadyProTitle": "Tu es déjà membre Pro",
+  "pricing.alreadyProUntil": "Ton abonnement est valable jusqu'au {date}.",
+  "pricing.alreadyProNoDate": "Ton abonnement Pro est actif.",
+  "pricing.expiredText": "Ton abonnement Pro a expiré. Renouvelle-le pour retrouver l'accès illimité.",
+ 
 };

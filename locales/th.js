@@ -237,5 +237,10 @@ export default {
   "letterType.research_proposal": "ข้อเสนอการวิจัย (Research Proposal)",
   "letterType.cover_letter": "จดหมายสมัครแบบสั้น",
   "level.all": "ทุกระดับ",
-  
+   "nav.renew": "ต่ออายุ Pro",
+  "pricing.alreadyProTitle": "คุณเป็นสมาชิก Pro อยู่แล้ว",
+  "pricing.alreadyProUntil": "แพ็กเกจของคุณใช้ได้ถึงวันที่ {date}",
+  "pricing.alreadyProNoDate": "แพ็กเกจ Pro ของคุณเปิดใช้งานอยู่",
+  "pricing.expiredText": "แพ็กเกจ Pro ของคุณหมดอายุแล้ว ต่ออายุเพื่อกลับมาใช้งานได้ไม่จำกัด",
+ 
 };

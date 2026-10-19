@@ -5,6 +5,8 @@ import mammoth from "mammoth";
 import { supabaseAdmin } from "../../lib/supabaseClient";
 import { improveLetter } from "../../lib/anthropic";
 import { getUserFromRequest } from "../../lib/authServer";
+import { isProActive } from "../../lib/subscriptionStatus";
+
 
 // Nécessaire pour accepter un upload de fichier (multipart/form-data) :
 // le bodyParser JSON par défaut de Next.js ne sait pas le lire.
@@ -44,8 +46,8 @@ export default async function handler(req, res) {
   if (!user) return res.status(401).json({ error: "Connecte-toi pour utiliser cette fonctionnalité." });
 
   const admin = supabaseAdmin();
-  const { data: sub } = await admin.from("subscriptions").select("plan").eq("user_id", user.id).single();
-  if (sub?.plan !== "pro") {
+  const { data: sub } = await admin.from("subscriptions").select("plan, current_period_end").eq("user_id", user.id).single();
+  if (!isProActive(sub)) {
     return res.status(403).json({ error: "Cette fonctionnalité est réservée aux membres Pro." });
   }
 

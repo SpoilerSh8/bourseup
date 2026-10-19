@@ -237,5 +237,10 @@ export default {
   "letterType.research_proposal": "Research Proposal",
   "letterType.cover_letter": "Short cover letter",
   "level.all": "All levels",
-  
+   "nav.renew": "Renew Pro",
+  "pricing.alreadyProTitle": "You're already a Pro member",
+  "pricing.alreadyProUntil": "Your subscription is valid until {date}.",
+  "pricing.alreadyProNoDate": "Your Pro subscription is active.",
+  "pricing.expiredText": "Your Pro subscription has expired. Renew it to get unlimited access back.",
+ 
 };

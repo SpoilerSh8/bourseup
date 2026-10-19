@@ -1,20 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useUser } from "../lib/useUser";
 import { useI18n } from "../lib/i18n";
 import { supabase } from "../lib/supabaseClient";
+import { isProActive, isProExpired } from "../lib/subscriptionStatus";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Navbar() {
   const { user, loading } = useUser();
   const { t } = useI18n();
   const [open, setOpen] = useState(false);
+  const [sub, setSub] = useState(null);
   const closeMenu = () => setOpen(false);
+
+  useEffect(() => {
+    if (!user) {
+      setSub(null);
+      return;
+    }
+    supabase.from("subscriptions").select("plan, current_period_end").eq("user_id", user.id).single()
+      .then(({ data }) => setSub(data));
+  }, [user]);
 
   function logout() {
     supabase.auth.signOut();
     closeMenu();
   }
+
+  const active = isProActive(sub);
+  const expired = isProExpired(sub);
 
   return (
     <nav className="navbar">
@@ -33,7 +47,11 @@ export default function Navbar() {
         <Link href="/generate" onClick={closeMenu}>{t("nav.generate")}</Link>
         <Link href="/correct" onClick={closeMenu}>{t("nav.correct")}</Link>
         {user && <Link href="/dashboard" onClick={closeMenu}>{t("nav.dashboard")}</Link>}
-        <Link href="/pricing" onClick={closeMenu}>{t("nav.pricing")}</Link>
+        {!active && (
+          <Link href="/pricing" onClick={closeMenu}>
+            {expired ? t("nav.renew") : t("nav.pricing")}
+          </Link>
+        )}
         <LanguageSwitcher />
         {!loading && (
           user ? (
