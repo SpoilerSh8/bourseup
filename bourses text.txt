@@ -1,0 +1,24 @@
+[
+  {
+    "name": "Bourse GKS (Global Korea Scholarship) — Licence",
+    "provider": "National Institute for International Education (NIIED) — Gouvernement de Corée du Sud",
+    "country": "Corée du Sud",
+    "level": "bachelor",
+    "deadline": "2026-11-30",
+    "_deadline_note": "Approximative : la source indique 'novembre, variable selon la voie et le pays'. Vérifie la date exacte pour l'année en cours avant publication.",
+    "word_limit": null,
+    "letter_type": "motivation_letter",
+    "official_link": "https://www.studyinkorea.go.kr",
+    "description": "Programme phare de bourses du gouvernement sud-coréen, géré par le NIIED, ouvert aux étudiants de plus de 180 pays. Vise à attirer des talents internationaux et à renforcer les échanges académiques et culturels avec la Corée du Sud. Considérée comme l'une des bourses les plus généreuses et prestigieuses au monde.",
+    "benefits": "Bourse complète\nFrais de scolarité pris en charge\nUne année de formation en langue coréenne\nBillet d'avion\nAllocation mensuelle",
+    "eligibility_criteria": "Bonne santé physique et mentale\nNe pas avoir déjà bénéficié d'une bourse du gouvernement coréen",
+    "_eligibility_note": "Liste probablement incomplète (GKS impose aussi généralement des limites d'âge et de niveau académique) — à compléter en consultant la page source directement.",
+    "required_documents": [],
+    "_documents_note": "Non extractible depuis la source disponible — à compléter manuellement depuis le site.",
+    "application_steps": "# Deux voies de candidature\n\n## 1. Embassy Track (voie de l'ambassade)\n- Candidature via l'ambassade de Corée du Sud dans le pays du candidat\n- Date limite : novembre\n- Inscription en ligne sur le site officiel Study in Korea\n\n## 2. University Track (voie universitaire)\n- Candidature directement auprès d'une université habilitée GKS\n- Date limite : septembre à novembre selon l'université\n- Candidature sur le site de l'université choisie\n\n## Calendrier indicatif\n- Annonce de la bourse : septembre\n- Soumission des candidatures : septembre à novembre\n- Examen et sélection : octobre à décembre\n- Résultats finaux : décembre",
+    "authority_info": "Selon la voie choisie : ambassade de Corée du Sud dans le pays du candidat (Embassy Track), ou bureau des relations internationales de l'université choisie (University Track).",
+    "tips": "Les deux voies ne peuvent généralement pas être cumulées pour un même candidat — vérifie les règles précises de l'année en cours avant de choisir.",
+    "_source": "https://www.maboursedetudes.com/scholarships/bourse-gks-global-korea-scholarship-coree-du-sud",
+    "_contact_found": "gksniied@korea.kr"
+  }
+]
