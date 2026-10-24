@@ -122,7 +122,7 @@ export default {
   "gen.next": "Continuer →",
   "gen.generate": "✨ Générer ma lettre",
   "gen.goPro": "Passer Pro →",
-  "gen.err.quota": "Quota gratuit atteint (1 lettre/mois). Passe au plan Pro pour continuer.",
+  "gen.err.quota": "Une erreur est survenue. Réessaie dans un instant.",
   "gen.err.login": "Session expirée, reconnecte-toi.",
   "gen.err.generic": "Une erreur est survenue. Réessaie dans un instant.",
   "gen.notActive": "Ton abonnement n'est pas encore actif.",

@@ -122,7 +122,7 @@ export default {
   "gen.next": "Continue →",
   "gen.generate": "✨ Generate my letter",
   "gen.goPro": "Go Pro →",
-  "gen.err.quota": "Free quota reached (1 letter/month). Go Pro to continue.",
+  "gen.err.quota": "Something went wrong. Please try again in a moment.",
   "gen.err.login": "Session expired, please log in again.",
   "gen.err.generic": "Something went wrong. Please try again in a moment.",
   "gen.notActive": "Your subscription isn't active yet.",

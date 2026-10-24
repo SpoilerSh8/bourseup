@@ -53,28 +53,9 @@ export default async function handler(req, res) {
 
     const plan = isProActive(sub) ? "pro" : "free";
     const bonus = sub?.bonus_generations || 0;
-    let useBonus = false;
-
-    if (plan === "free" && bonus <= 0) {
-      const startOfMonth = new Date();
-      startOfMonth.setDate(1);
-      startOfMonth.setHours(0, 0, 0, 0);
-
-      const { count } = await admin
-        .from("documents")
-        .select("id", { count: "exact", head: true })
-        .eq("user_id", userId)
-        .eq("type", "motivation_letter")
-        .gte("created_at", startOfMonth.toISOString());
-
-      if ((count || 0) >= 1) {
-        return res.status(403).json({
-          error: "Quota gratuit atteint (1 lettre/mois). Passe au plan Pro pour continuer.",
-        });
-      }
-    } else if (plan === "free" && bonus > 0) {
-      useBonus = true;
-    }
+    // Free = toujours un aperçu, jamais bloqué (seul le plafond de sécurité plus bas limite le volume).
+    // Un bonus accordé par un admin débloque la lettre complète sans passer par Pro.
+    const useBonus = plan === "free" && bonus > 0;
 
     // Plafond de sécurité global : s'applique à TOUS les plans, y compris Pro.
     const HARD_MONTHLY_CAP = 30;
