@@ -29,9 +29,11 @@ export default function Login() {
   async function forgotPassword(e) {
     e.preventDefault();
     if (!email) return alert(t("auth.forgotNeedEmail"));
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
     await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
+      redirectTo: `${siteUrl}/reset-password`,
     });
+
     alert(t("auth.forgotSent"));
   }
 
