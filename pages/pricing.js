@@ -7,8 +7,8 @@ import { isProActive, isProExpired } from "../lib/subscriptionStatus";
 import { WHATSAPP_NUMBER, WAVE_NUMBER, WAVE_ACCOUNT_NAME, PRO_PRICE_LABEL, PAYMENTS_ENABLED } from "../lib/contact";
 
 const PAYMENT_LOGOS = [
-  { src: "/payments/wave.svg", alt: "Wave" },
-  { src: "/payments/orange-money.svg", alt: "Orange Money" },
+  { src: "/payments/wave.png", alt: "Wave" },
+  { src: "/payments/orange-money.png", alt: "Orange Money" },
   { src: "/payments/visa.svg", alt: "Visa" },
   { src: "/payments/mastercard.svg", alt: "Mastercard" },
 ];
