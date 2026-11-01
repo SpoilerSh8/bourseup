@@ -22,7 +22,7 @@ const CAPITALS = [
   ["royaume", "london", "🇬🇧", "center"],
   ["france", "paris", "🇫🇷", "center"],
   ["europe", "bruxelles", "🇪🇺", "center"],
-  ["coree", "seoul", "🇰🇷", "center 60%"],
+  ["coree", "seoul", "🇰🇷", "center"],
   ["chine", "beijing", "🇨🇳", "center"],
 ];
 
