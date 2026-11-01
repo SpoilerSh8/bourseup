@@ -20,7 +20,11 @@ export default function Login() {
 
     setLoading(false);
     if (error) {
-      setError(t("auth.badCreds"));
+      setError(
+        error.message.toLowerCase().includes("not confirmed")
+          ? t("auth.notConfirmed")
+          : t("auth.badCreds")
+      );
     } else {
       router.push("/scholarships");
     }
