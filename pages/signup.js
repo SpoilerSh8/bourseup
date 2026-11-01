@@ -19,10 +19,14 @@ export default function Signup() {
     setLoading(true);
     setError("");
 
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { full_name: fullName, country } },
+      options: {
+        data: { full_name: fullName, country },
+        emailRedirectTo: `${siteUrl}/scholarships`,
+      },
     });
 
     setLoading(false);

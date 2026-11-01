@@ -255,5 +255,8 @@ export default {
   "pricing.manual.createAccount": "Pas encore de compte ? Crée-en un d'abord : on active le Pro sur l'email de ton compte.",
    "auth.checkEmailTitle": "Vérifie ta boîte mail",
   "auth.checkEmailText": "On t'a envoyé un lien de confirmation. Clique dessus pour activer ton compte (pense à regarder les spams).",
+  "auth.checkEmailTitle": "Vérifie ta boîte mail",
+  "auth.checkEmailText": "On t'a envoyé un lien de confirmation. Clique dessus pour activer ton compte (pense à regarder les spams).",
+  "auth.notConfirmed": "Ton adresse email n'est pas encore confirmée. Clique sur le lien reçu par email (regarde aussi les spams).",
 
 };

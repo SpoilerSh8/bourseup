@@ -255,5 +255,8 @@ export default {
   "pricing.manual.createAccount": "No account yet? Create one first: we activate Pro on your account's email.",
   "auth.checkEmailTitle": "Check your inbox",
   "auth.checkEmailText": "We sent you a confirmation link. Click it to activate your account (check your spam folder too).",
+  "auth.checkEmailTitle": "Check your inbox",
+  "auth.checkEmailText": "We sent you a confirmation link. Click it to activate your account (check your spam folder too).",
+  "auth.notConfirmed": "Your email address isn't confirmed yet. Click the link we emailed you (check spam too).",
 
 };
