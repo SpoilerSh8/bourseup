@@ -12,13 +12,14 @@ export default function Signup() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const [checkEmail, setCheckEmail] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
     setError("");
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: { data: { full_name: fullName, country } },
@@ -27,9 +28,20 @@ export default function Signup() {
     setLoading(false);
     if (error) {
       setError(error.message);
+    } else if (!data.session) {
+      setCheckEmail(true); // confirmation par email activée
     } else {
       router.push("/scholarships");
     }
+
+  }
+  if (checkEmail) {
+    return (
+      <div className="container">
+        <h1>{t("auth.checkEmailTitle")}</h1>
+        <p>{t("auth.checkEmailText")}</p>
+      </div>
+    );
   }
 
   return (

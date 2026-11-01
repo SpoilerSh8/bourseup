@@ -253,5 +253,7 @@ export default {
   "pricing.manual.waText": "สวัสดี ฉันชำระเงิน {amount} ผ่าน Wave สำหรับแผน BourseUp Pro อีเมลบัญชีของฉัน: {email} นี่คือใบเสร็จของฉัน:",
   "pricing.manual.noWave": "ไม่มี Wave? ทัก WhatsApp มาหาเรา เราจะหาวิธีอื่นให้",
   "pricing.manual.createAccount": "ยังไม่มีบัญชี? สร้างบัญชีก่อน เราจะเปิดใช้งาน Pro ที่อีเมลของบัญชีคุณ",
+  "auth.checkEmailTitle": "ตรวจสอบกล่องอีเมลของคุณ",
+  "auth.checkEmailText": "เราส่งลิงก์ยืนยันให้คุณแล้ว คลิกลิงก์เพื่อเปิดใช้งานบัญชี (อย่าลืมดูในโฟลเดอร์สแปมด้วย)",
 
 };

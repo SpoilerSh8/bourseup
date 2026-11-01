@@ -7,6 +7,7 @@ serve(async () => {
   const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
   const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
   const resendKey = Deno.env.get("RESEND_API_KEY")!;
+  const siteUrl = Deno.env.get("SITE_URL") || "https://bourseup.co";
   const admin = createClient(supabaseUrl, serviceKey);
 
   const { data: rows, error } = await admin
@@ -40,8 +41,10 @@ serve(async () => {
       method: "POST",
       headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        from: "BourseUp <onboarding@resend.com>",
+        from: "BourseUp <notifications@bourseup.co>",
+        reply_to: "contact@bourseup.co",
         to: email,
+
         subject:
           daysLeft === 0
             ? `Aujourd'hui : deadline pour ${row.scholarships.name}`
@@ -49,6 +52,7 @@ serve(async () => {
         html: `<p>Bonjour,</p>
                <p>La deadline pour <strong>${row.scholarships.name}</strong> approche : il reste ${daysLeft} jour(s).</p>
                <p><a href="${row.scholarships.official_link}">Voir la bourse</a></p>
+               <p><a href="${siteUrl}/dashboard">Voir mon suivi sur BourseUp</a></p>
                <p>— BourseUp</p>`,
       }),
     });
