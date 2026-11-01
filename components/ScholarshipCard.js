@@ -1,5 +1,7 @@
+import { useState } from "react";
 import Link from "next/link";
 import { useI18n } from "../lib/i18n";
+import styles from "./ScholarshipCard.module.css";
 
 function daysLeft(deadline) {
   if (!deadline) return null;
@@ -14,37 +16,56 @@ function urgency(days) {
   return "plenty";
 }
 
-export default function ScholarshipCard({ scholarship, onTrack, isTracked }) {
+const CAPITALS = [
+  ["turquie", "ankara", "🇹🇷"], ["hongrie", "budapest", "🇭🇺"],
+  ["royaume", "london", "🇬🇧"], ["france", "paris", "🇫🇷"],
+  ["europe", "bruxelles", "🇪🇺"], ["coree", "seoul", "🇰🇷"],
+];
+const norm = (s) => (s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+export default function ScholarshipCard({ scholarship, onTrack, isTracked, index = 0 }) {
   const { t } = useI18n();
+  const [imgFailed, setImgFailed] = useState(false);
   const days = daysLeft(scholarship.deadline);
   const state = urgency(days);
-  const meta = [scholarship.provider, scholarship.country, scholarship.level && t(`level.${scholarship.level}`)]
-    .filter(Boolean)
-    .join(" · ");
+  const match = CAPITALS.find(([key]) => norm(scholarship.country).includes(key));
+  const benefits = (scholarship.benefits || "").split("\n").map((x) => x.trim()).filter(Boolean).slice(0, 3);
+  const meta = [scholarship.provider, scholarship.country].filter(Boolean).join(" · ");
 
   return (
-    <div className={`scholar-row ${state}`}>
-      <div className="scholar-row-deadline">
-        <span className="scholar-row-days">{days !== null ? Math.max(days, 0) : "—"}</span>
-        <span className="scholar-row-days-label">{days !== null ? t("card.daysUnit") : t("card.na")}</span>
-      </div>
-
-      <div className="scholar-row-body">
-        <Link href={`/scholarships/${scholarship.id}`} className="scholar-row-title">
-          {scholarship.name}
-        </Link>
-        <p className="scholar-row-meta">{meta}</p>
-        <span className={`status-tag ${state}`}>{t(`card.urgency.${state}`)}</span>
-      </div>
-
-      <div className="scholar-row-actions">
-        <Link href={`/scholarships/${scholarship.id}`}><button className="secondary">{t("card.detail")}</button></Link>
-        {isTracked ? (
-          <Link href="/dashboard"><button>{t("card.tracked")}</button></Link>
-        ) : (
-          <button onClick={() => onTrack(scholarship.id)}>{t("card.track")}</button>
+    <article className={`${styles.card} ${styles[state] || ""}`} style={{ animationDelay: `${index * 80}ms` }}>
+      <div className={styles.cover}>
+        {match && !imgFailed && (
+          <img src={`/img/capitales/${match[1]}.jpg`} alt="" loading="lazy" onError={() => setImgFailed(true)} />
         )}
+        {match && <span className={styles.flag}>{match[2]}</span>}
+        {scholarship.level && <span className={styles.lvl}>{t(`level.${scholarship.level}`)}</span>}
+        <span className={styles.tag}>{t(`card.urgency.${state}`)}</span>
       </div>
-    </div>
+
+      <div className={styles.body}>
+        <Link href={`/scholarships/${scholarship.id}`} className={styles.title}>{scholarship.name}</Link>
+        <p className={styles.prov}>{meta}</p>
+        {scholarship.description && <p className={styles.desc}>{scholarship.description}</p>}
+        {benefits.length > 0 && (
+          <div className={styles.chips}>{benefits.map((b, i) => <span key={i} className={styles.chip}>{b}</span>)}</div>
+        )}
+
+        <div className={styles.foot}>
+          <div className={styles.dl}>
+            {days !== null ? t("card.daysUnit") : t("card.na")}
+            <b>{days !== null ? Math.max(days, 0) : "—"}</b>
+          </div>
+          <div className={styles.actions}>
+            <Link href={`/scholarships/${scholarship.id}`}><button className="secondary">{t("card.detail")}</button></Link>
+            {isTracked ? (
+              <Link href="/dashboard"><button>{t("card.tracked")}</button></Link>
+            ) : (
+              <button onClick={() => onTrack(scholarship.id)}>{t("card.track")}</button>
+            )}
+          </div>
+        </div>
+      </div>
+    </article>
   );
 }
