@@ -39,7 +39,7 @@ export default function ScholarshipCard({ scholarship, onTrack, isTracked, index
 
   return (
     <article className={`${styles.card} ${styles[state] || ""}`} style={{ animationDelay: `${index * 80}ms` }}>
-      <div className={styles.cover}>
+      <Link href={`/scholarships/${scholarship.id}`} className={styles.cover} aria-label={scholarship.name}>
         {match && !imgFailed && (
           <img
             src={`/img/capitales/${match[1]}.jpg`}
@@ -49,12 +49,12 @@ export default function ScholarshipCard({ scholarship, onTrack, isTracked, index
             style={{ objectPosition: match[3] }}
             onError={() => setImgFailed(true)}
           />
-
         )}
         {match && <span className={styles.flag}>{match[2]}</span>}
         {scholarship.level && <span className={styles.lvl}>{t(`level.${scholarship.level}`)}</span>}
         <span className={styles.tag}>{t(`card.urgency.${state}`)}</span>
-      </div>
+      </Link>
+
 
       <div className={styles.body}>
         <Link href={`/scholarships/${scholarship.id}`} className={styles.title}>{scholarship.name}</Link>
