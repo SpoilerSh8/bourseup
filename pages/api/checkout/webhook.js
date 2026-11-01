@@ -20,6 +20,9 @@ function getRawBody(req) {
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
+    // Paiement en ligne désactivé : ce webhook n'accorde rien.
+  if (process.env.NEXT_PUBLIC_PAYMENTS_ENABLED !== "true") return res.status(200).send("DISABLED");
+
 
   const raw = await getRawBody(req);
   const parsed = qs.parse(raw);

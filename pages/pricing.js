@@ -4,6 +4,7 @@ import { useUser } from "../lib/useUser";
 import { useI18n } from "../lib/i18n";
 import { supabase } from "../lib/supabaseClient";
 import { isProActive, isProExpired } from "../lib/subscriptionStatus";
+import { WHATSAPP_NUMBER, WAVE_NUMBER, WAVE_ACCOUNT_NAME, PRO_PRICE_LABEL, PAYMENTS_ENABLED } from "../lib/contact";
 
 const PAYMENT_LOGOS = [
   { src: "/payments/wave.svg", alt: "Wave" },
@@ -19,6 +20,7 @@ export default function Pricing() {
   const [loading, setLoading] = useState(false);
   const [sub, setSub] = useState(null);
   const [subLoading, setSubLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -32,7 +34,9 @@ export default function Pricing() {
       });
   }, [user]);
 
+  // Paiement en ligne (PayDunya) : conservé tel quel, mais inactif tant que PAYMENTS_ENABLED est faux.
   async function upgrade() {
+    if (!PAYMENTS_ENABLED) return; // on reste sur place, rien ne se passe
     if (!user) {
       window.location.href = "/login";
       return;
@@ -53,8 +57,19 @@ export default function Pricing() {
     }
   }
 
+  async function copyNumber() {
+    try {
+      await navigator.clipboard.writeText(WAVE_NUMBER.replace(/\s/g, ""));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (e) {}
+  }
+
   const active = isProActive(sub);
   const expired = isProExpired(sub);
+  const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+    t("pricing.manual.waText", { amount: PRO_PRICE_LABEL, email: user?.email || "—" })
+  )}`;
 
   return (
     <div className="container">
@@ -75,9 +90,9 @@ export default function Pricing() {
       {!subLoading && !active && (
         <>
           <p>{expired ? t("pricing.expiredText") : t("pricing.text")}</p>
-          <p className="pricing-amount">2 500 FCFA <span>/ mois</span></p>
+          <p className="pricing-amount">{PRO_PRICE_LABEL} <span>/ mois</span></p>
 
-          <div className="pay-methods">
+          <div className={`pay-methods ${PAYMENTS_ENABLED ? "" : "is-disabled"}`}>
             {PAYMENT_LOGOS.map((m) => (
               <button
                 key={m.alt}
@@ -85,13 +100,46 @@ export default function Pricing() {
                 className="pay-method-btn"
                 onClick={upgrade}
                 disabled={loading}
+                aria-disabled={!PAYMENTS_ENABLED}
                 aria-label={`${t("pricing.payWith")} ${m.alt}`}
               >
                 <img src={m.src} alt={m.alt} />
               </button>
             ))}
           </div>
-          <p className="pay-methods-note">{loading ? t("pricing.redirecting") : t("pricing.methodsNote")}</p>
+
+          {PAYMENTS_ENABLED ? (
+            <p className="pay-methods-note">{loading ? t("pricing.redirecting") : t("pricing.methodsNote")}</p>
+          ) : (
+            <div className="manual-pay">
+              <div className="manual-pay-alert">
+                <strong>{t("pricing.unavailableTitle")}</strong>
+                <p>{t("pricing.unavailableText")}</p>
+              </div>
+
+              <ol className="manual-pay-steps">
+                <li>
+                  {t("pricing.manual.step1", { amount: PRO_PRICE_LABEL })}
+                  <div className="wave-card">
+                    <div><span>{t("pricing.manual.number")}</span><strong>{WAVE_NUMBER}</strong></div>
+                    <div><span>{t("pricing.manual.name")}</span><strong>{WAVE_ACCOUNT_NAME}</strong></div>
+                    <button type="button" onClick={copyNumber}>{copied ? t("letter.copied") : t("letter.copy")}</button>
+                  </div>
+                </li>
+                <li>{t("pricing.manual.step2")}</li>
+                <li>{t("pricing.manual.step3")}</li>
+              </ol>
+
+              {!user && (
+                <p className="meta">{t("pricing.manual.createAccount")} <a href="/signup">{t("nav.signup")}</a></p>
+              )}
+
+              <a href={waLink} target="_blank" rel="noreferrer">
+                <button className="wiz-btn primary">💬 {t("pricing.manual.whatsappBtn")}</button>
+              </a>
+              <p className="pay-methods-note">{t("pricing.manual.noWave")}</p>
+            </div>
+          )}
         </>
       )}
     </div>

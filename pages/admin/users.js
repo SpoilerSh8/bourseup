@@ -150,7 +150,13 @@ export default function AdminUsers() {
                   <span className="meta">{u.email}</span>
                   {u.is_admin && <span className="badge" style={{ marginLeft: "0.5rem" }}>admin</span>}
                 </td>
-                <td>{u.plan}{u.bonus_generations > 0 && ` (+${u.bonus_generations} bonus)`}</td>
+                <td>
+                  {u.plan}{u.bonus_generations > 0 && ` (+${u.bonus_generations} bonus)`}
+                  {u.plan === "pro" && u.current_period_end && (
+                    <><br /><span className="meta">→ {new Date(u.current_period_end).toLocaleDateString("fr-FR")}</span></>
+                  )}
+                </td>
+
                 <td>{u.documents_count}</td>
                 <td>{new Date(u.created_at).toLocaleDateString("fr-FR")}</td>
                 <td>
@@ -158,9 +164,13 @@ export default function AdminUsers() {
                     <button onClick={() => openActivity(u.id)}>
                       {expandedUser === u.id ? "Fermer" : "Voir activité"}
                     </button>
-                    <button onClick={() => runAction(u.id, "set_plan", u.plan === "pro" ? "free" : "pro")}>
-                      {u.plan === "pro" ? "Repasser Free" : "Passer Pro"}
+                    <button onClick={() => runAction(u.id, "set_plan", "pro")}>
+                      {u.plan === "pro" ? "Prolonger Pro +30 j" : "Activer Pro (30 j)"}
                     </button>
+                    {u.plan === "pro" && (
+                      <button onClick={() => runAction(u.id, "set_plan", "free")}>Repasser Free</button>
+                    )}
+
                       <button onClick={() => runAction(u.id, "grant_bonus", 1)}>+1 lettre bonus</button>
                       <button onClick={() => resetPassword(u.id, u.email)}>Réinitialiser mot de passe</button>
 

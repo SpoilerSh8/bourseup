@@ -444,3 +444,14 @@ html[data-lang-pending] body { visibility: hidden; }
 .steps-markdown table { width: 100%; border-collapse: collapse; margin: 0 0 1.1rem; font-size: 0.88rem; }
 .steps-markdown th, .steps-markdown td { border: 1px solid #E4EAEA; padding: 0.5rem 0.7rem; text-align: left; }
 .steps-markdown th { background: #F7FAFA; color: #1B3A4B; font-weight: 600; }
+.pay-methods.is-disabled .pay-method-btn { opacity: 0.5; cursor: not-allowed; }
+.pay-methods.is-disabled .pay-method-btn:hover { border-color: #D6E4E5; transform: none; }
+.manual-pay { margin-top: 1.4rem; max-width: 560px; }
+.manual-pay-alert { background: #FFFBF5; border: 1px solid #F2A65A; color: #7A4A12; border-radius: 10px; padding: 0.9rem 1.1rem; margin-bottom: 1.1rem; }
+.manual-pay-alert p { margin: 0.3rem 0 0; font-size: 0.9rem; }
+.manual-pay-steps { padding-left: 1.2rem; line-height: 1.6; color: #3E4E56; }
+.manual-pay-steps li { margin-bottom: 0.9rem; }
+.wave-card { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2rem; margin-top: 0.6rem; padding: 0.8rem 1rem; background: #FAFCFC; border: 1px solid #D6E4E5; border-radius: 10px; }
+.wave-card span { display: block; font-size: 0.75rem; color: #6C7A80; }
+.wave-card strong { font-size: 1.05rem; color: #1B3A4B; }
+.wave-card button { margin-left: auto; background: #fff; border: 1px solid #1B3A4B; color: #1B3A4B; border-radius: 6px; padding: 0.4rem 0.8rem; cursor: pointer; }

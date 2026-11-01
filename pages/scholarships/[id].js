@@ -18,7 +18,7 @@ function urgencyClass(days) {
   if (days < 0) return "closed";
   if (days <= 14) return "urgent";
   if (days <= 30) return "soon";
-  return "plenty";
+  return "plenty";`  `
 }
 
 const lines = (text) => (text || "").split("\n").filter(Boolean);

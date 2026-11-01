@@ -242,5 +242,16 @@ export default {
   "pricing.alreadyProUntil": "Ton abonnement est valable jusqu'au {date}.",
   "pricing.alreadyProNoDate": "Ton abonnement Pro est actif.",
   "pricing.expiredText": "Ton abonnement Pro a expiré. Renouvelle-le pour retrouver l'accès illimité.",
+  "pricing.unavailableTitle": "Paiement en ligne temporairement indisponible",
+  "pricing.unavailableText": "Les services de paiement ci-dessus (Wave, Orange Money, Visa, Mastercard) sont temporairement indisponibles. En attendant, tu peux payer manuellement avec Wave, c'est simple :",
+  "pricing.manual.step1": "Envoie {amount} par Wave au numéro ci-dessous",
+  "pricing.manual.number": "Numéro Wave",
+  "pricing.manual.name": "Nom du compte",
+  "pricing.manual.step2": "Envoie-nous la capture de ton reçu sur WhatsApp, avec l'email de ton compte BourseUp",
+  "pricing.manual.step3": "On active ton plan Pro dès que le paiement est vérifié",
+  "pricing.manual.whatsappBtn": "Envoyer mon reçu sur WhatsApp",
+  "pricing.manual.waText": "Bonjour, j'ai payé {amount} par Wave pour le plan BourseUp Pro. Email de mon compte : {email}. Voici mon reçu :",
+  "pricing.manual.noWave": "Tu n'as pas Wave ? Écris-nous sur WhatsApp, on trouvera une autre solution.",
+  "pricing.manual.createAccount": "Pas encore de compte ? Crée-en un d'abord : on active le Pro sur l'email de ton compte.",
  
 };

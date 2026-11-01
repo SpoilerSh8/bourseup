@@ -4,6 +4,11 @@ const PRO_PRICE_XOF = 2500; // ajuste selon le prix réel que tu veux facturer
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Méthode non autorisée" });
+    // Paiement en ligne désactivé : aucune facture ne peut être créée.
+  if (process.env.NEXT_PUBLIC_PAYMENTS_ENABLED !== "true") {
+    return res.status(503).json({ error: "Paiement en ligne temporairement indisponible." });
+  }
+
 
   const { userId } = req.body;
   if (!userId) return res.status(400).json({ error: "userId requis." });

@@ -26,9 +26,21 @@ export default async function handler(req, res) {
   try {
     if (action === "set_plan") {
       if (!["free", "pro"].includes(value)) return res.status(400).json({ error: "value doit être 'free' ou 'pro'." });
-      // Un Pro accordé manuellement par un admin n'expire pas tout seul (pas de current_period_end).
-      await admin.from("subscriptions").update({ plan: value, current_period_end: null }).eq("user_id", targetUserId);
+
+      let periodEnd = null; // free : pas de date
+      if (value === "pro") {
+        // Paiement manuel = Pro pour 30 jours. Si l'abonnement est encore actif, on prolonge
+        // à partir de sa date de fin (renouvellement anticipé sans perdre de jours).
+        const { data: current } = await admin
+          .from("subscriptions").select("current_period_end").eq("user_id", targetUserId).single();
+        const base = current?.current_period_end && new Date(current.current_period_end) > new Date()
+          ? new Date(current.current_period_end)
+          : new Date();
+        periodEnd = new Date(base.getTime() + 30 * 24 * 60 * 60 * 1000).toISOString();
+      }
+      await admin.from("subscriptions").update({ plan: value, current_period_end: periodEnd }).eq("user_id", targetUserId);
     }
+
 
     if (action === "grant_bonus") {
       const amount = parseInt(value, 10) || 1;

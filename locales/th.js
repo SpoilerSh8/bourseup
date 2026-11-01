@@ -242,5 +242,16 @@ export default {
   "pricing.alreadyProUntil": "แพ็กเกจของคุณใช้ได้ถึงวันที่ {date}",
   "pricing.alreadyProNoDate": "แพ็กเกจ Pro ของคุณเปิดใช้งานอยู่",
   "pricing.expiredText": "แพ็กเกจ Pro ของคุณหมดอายุแล้ว ต่ออายุเพื่อกลับมาใช้งานได้ไม่จำกัด",
- 
+   "pricing.unavailableTitle": "การชำระเงินออนไลน์ยังไม่พร้อมใช้งานชั่วคราว",
+  "pricing.unavailableText": "บริการชำระเงินด้านบน (Wave, Orange Money, Visa, Mastercard) ยังไม่พร้อมใช้งานชั่วคราว ระหว่างนี้คุณสามารถชำระเงินด้วย Wave ด้วยตนเองได้ ง่ายมาก:",
+  "pricing.manual.step1": "โอน {amount} ผ่าน Wave ไปยังหมายเลขด้านล่าง",
+  "pricing.manual.number": "หมายเลข Wave",
+  "pricing.manual.name": "ชื่อบัญชี",
+  "pricing.manual.step2": "ส่งภาพหน้าจอใบเสร็จมาทาง WhatsApp พร้อมอีเมลบัญชี BourseUp ของคุณ",
+  "pricing.manual.step3": "เราจะเปิดใช้งานแผน Pro ให้ทันทีที่ตรวจสอบการชำระเงินแล้ว",
+  "pricing.manual.whatsappBtn": "ส่งใบเสร็จทาง WhatsApp",
+  "pricing.manual.waText": "สวัสดี ฉันชำระเงิน {amount} ผ่าน Wave สำหรับแผน BourseUp Pro อีเมลบัญชีของฉัน: {email} นี่คือใบเสร็จของฉัน:",
+  "pricing.manual.noWave": "ไม่มี Wave? ทัก WhatsApp มาหาเรา เราจะหาวิธีอื่นให้",
+  "pricing.manual.createAccount": "ยังไม่มีบัญชี? สร้างบัญชีก่อน เราจะเปิดใช้งาน Pro ที่อีเมลของบัญชีคุณ",
+
 };
