@@ -17,10 +17,15 @@ function urgency(days) {
 }
 
 const CAPITALS = [
-  ["turquie", "ankara", "🇹🇷"], ["hongrie", "budapest", "🇭🇺"],
-  ["royaume", "london", "🇬🇧"], ["france", "paris", "🇫🇷"],
-  ["europe", "bruxelles", "🇪🇺"], ["coree", "seoul", "🇰🇷"],
+  ["turquie", "ankara", "🇹🇷", "center"],
+  ["hongrie", "budapest", "🇭🇺", "center"],
+  ["royaume", "london", "🇬🇧", "center"],
+  ["france", "paris", "🇫🇷", "center"],
+  ["europe", "bruxelles", "🇪🇺", "center"],
+  ["coree", "seoul", "🇰🇷", "center 60%"],
+  ["chine", "beijing", "🇨🇳", "center"],
 ];
+
 const norm = (s) => (s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
 export default function ScholarshipCard({ scholarship, onTrack, isTracked, index = 0 }) {
@@ -36,7 +41,15 @@ export default function ScholarshipCard({ scholarship, onTrack, isTracked, index
     <article className={`${styles.card} ${styles[state] || ""}`} style={{ animationDelay: `${index * 80}ms` }}>
       <div className={styles.cover}>
         {match && !imgFailed && (
-          <img src={`/img/capitales/${match[1]}.jpg`} alt="" loading="lazy" onError={() => setImgFailed(true)} />
+          <img
+            src={`/img/capitales/${match[1]}.jpg`}
+            alt=""
+            loading={index < 3 ? "eager" : "lazy"}
+            decoding="async"
+            style={{ objectPosition: match[3] }}
+            onError={() => setImgFailed(true)}
+          />
+
         )}
         {match && <span className={styles.flag}>{match[2]}</span>}
         {scholarship.level && <span className={styles.lvl}>{t(`level.${scholarship.level}`)}</span>}

@@ -8,7 +8,7 @@
 @keyframes in{to{opacity:1;transform:none}}
 .cover{height:170px;position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:space-between;padding:14px;
   background:linear-gradient(135deg,#0F6E6E,#0A4545)}
-.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.cover img{position:absolute;inset:0;display:block;width:100% !important;height:100% !important;max-width:none !important;object-fit:cover;transition:transform .6s}
 .card:hover .cover img{transform:scale(1.1)}
 .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 40%,rgba(0,0,0,.55));transition:opacity .3s}
 .card:hover .cover::after{opacity:.7}
