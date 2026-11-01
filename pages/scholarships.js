@@ -4,10 +4,8 @@ import { useUser } from "../lib/useUser";
 import { useI18n } from "../lib/i18n";
 import ScholarshipCard from "../components/ScholarshipCard";
 import styles from "../components/ScholarshipCard.module.css";
-// ...
-const [q, setQ] = useState("");
-const [level, setLevel] = useState("");
 
+const norm = (s) => (s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
 export default function Scholarships() {
   const { user } = useUser();
@@ -15,12 +13,14 @@ export default function Scholarships() {
   const [scholarships, setScholarships] = useState([]);
   const [trackedIds, setTrackedIds] = useState(new Set());
   const [loading, setLoading] = useState(true);
+  const [q, setQ] = useState("");
+  const [level, setLevel] = useState("");
 
   useEffect(() => {
     fetch("/api/scholarships")
       .then((r) => r.json())
       .then((data) => {
-        setScholarships(data);
+        setScholarships(Array.isArray(data) ? data : []);
         setLoading(false);
       });
   }, []);
@@ -46,11 +46,10 @@ export default function Scholarships() {
 
   if (loading) return <p className="loading">{t("list.loading")}</p>;
 
-const norm = (s) => (s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-const shown = scholarships.filter((s) =>
-  (!level || s.level === level || s.level === "all") &&
-  norm(`${s.name} ${s.country} ${s.provider}`).includes(norm(q))
-);
+  const shown = scholarships.filter((s) =>
+    (!level || s.level === level || s.level === "all") &&
+    norm(`${s.name} ${s.country} ${s.provider}`).includes(norm(q))
+  );
 
   return (
     <div className="container">
@@ -59,15 +58,22 @@ const shown = scholarships.filter((s) =>
         <input placeholder="Rechercher une bourse ou un pays…" value={q} onChange={(e) => setQ(e.target.value)} />
         <select value={level} onChange={(e) => setLevel(e.target.value)}>
           <option value="">—</option>
-          {["bachelor", "master", "phd"].map((l) => <option key={l} value={l}>{t(`level.${l}`)}</option>)}
+          {["bachelor", "master", "phd"].map((l) => (
+            <option key={l} value={l}>{t(`level.${l}`)}</option>
+          ))}
         </select>
       </div>
-    <div className={styles.grid}>
-  {shown.map((s, i) => (
-    <ScholarshipCard key={s.id} index={i} scholarship={s} onTrack={trackScholarship} isTracked={trackedIds.has(s.id)} />
-  ))}
-</div>
-
+      <div className={styles.grid}>
+        {shown.map((s, i) => (
+          <ScholarshipCard
+            key={s.id}
+            index={i}
+            scholarship={s}
+            onTrack={trackScholarship}
+            isTracked={trackedIds.has(s.id)}
+          />
+        ))}
+      </div>
     </div>
   );
 }
