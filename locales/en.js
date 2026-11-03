@@ -258,5 +258,14 @@ export default {
   "auth.checkEmailTitle": "Check your inbox",
   "auth.checkEmailText": "We sent you a confirmation link. Click it to activate your account (check your spam folder too).",
   "auth.notConfirmed": "Your email address isn't confirmed yet. Click the link we emailed you (check spam too).",
-
+  "about.companyTitle": "SHAi1, the company behind BourseUp",
+  "about.company": "SHAi1 is a young company focused on digital innovation. It builds useful, accessible solutions, designed first for African students and talent. BourseUp is one of its products.",  "about.missionTitle": "Our mission",
+  "about.mission": "To make studying abroad a matter of merit and preparation, not of access to expensive advice: find the right scholarship, build a strong application, and never miss a deadline.",
+  "about.valuesTitle": "Our values",
+  "about.value1Title": "Accessibility",
+  "about.value1": "simple tools, free to start with, priced with students in mind.",
+  "about.value2Title": "Authenticity",
+  "about.value2": "AI helps you structure and clarify; it doesn't replace your story or your voice.",
+  "about.value3Title": "Trust",
+  "about.value3": "your documents stay private, and we flag when something should be checked on the official website.",
 };

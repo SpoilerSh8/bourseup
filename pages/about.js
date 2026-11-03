@@ -3,6 +3,7 @@ import { CONTACT_EMAIL, WHATSAPP_NUMBER } from "../lib/contact";
 
 export default function About() {
   const { t } = useI18n();
+  const values = ["1", "2", "3"];
   return (
     <div className="container about-page">
       <section className="about-hero">
@@ -15,16 +16,25 @@ export default function About() {
         <p>{t("about.genesis")}</p>
       </section>
 
-      <section className="about-section founder-section">
-        <h2>{t("about.founderTitle")}</h2>
-        <div className="founder-card">
-          <img src="/founder.jpg" alt={t("about.photoAlt")} className="founder-photo" />
-          <div>
-            <h3>Serigne Habib Sy</h3>
-            <p className="founder-role">{t("about.founderRole")}</p>
-            <p>{t("about.bio")}</p>
-          </div>
-        </div>
+      <section className="about-section">
+        <img
+          src="/public/img/shai1-logo.png"
+          alt="SHAi1"
+          style={{ height: 72, width: "auto", display: "block", marginBottom: "1rem" }}
+          onError={(e) => { e.currentTarget.style.display = "none"; }}
+        />
+        <h2>{t("about.companyTitle")}</h2>
+        <p>{t("about.company")}</p>
+        <h3>{t("about.missionTitle")}</h3>
+        <p>{t("about.mission")}</p>
+        <h3>{t("about.valuesTitle")}</h3>
+        <ul>
+          {values.map((n) => (
+            <li key={n}>
+              <strong>{t(`about.value${n}Title`)}</strong> — {t(`about.value${n}`)}
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="about-section">
