@@ -18,7 +18,7 @@ export default function About() {
 
       <section className="about-section">
         <img
-          src="/public/img/shai1-logo.png"
+          src="/img/shai1-logo.png"
           alt="SHAi1"
           style={{ height: 72, width: "auto", display: "block", marginBottom: "1rem" }}
           onError={(e) => { e.currentTarget.style.display = "none"; }}
