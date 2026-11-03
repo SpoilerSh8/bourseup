@@ -18,10 +18,18 @@ export default function About() {
 
       <section className="about-section">
         <img
-          src="/img/shai1-logo.png"
-          alt="SHAi1"
-          style={{ height: 72, width: "auto", display: "block", marginBottom: "1rem" }}
-          onError={(e) => { e.currentTarget.style.display = "none"; }}
+          src="/img/shai1-banner.jpg"
+          alt="SHAi1 — Building Tomorrow"
+          style={{
+            width: "100%",
+            height: "auto",
+            minHeight: 150,
+            objectFit: "cover",
+            objectPosition: "center",
+            display: "block",
+            borderRadius: 18,
+            marginBottom: "1.5rem",
+          }}
         />
         <h2>{t("about.companyTitle")}</h2>
         <p>{t("about.company")}</p>
